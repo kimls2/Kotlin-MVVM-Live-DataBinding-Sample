@@ -54,9 +54,10 @@ open class SingleLiveEvent<T> : MutableLiveData<T>() {
 //            }
 //        })
 
-        super.observe(owner, observer)
-
-
+        super.observe(owner, Observer<T> {
+            if (mPending.compareAndSet(true, false))
+                observer.onChanged(it)
+        })
     }
 
     @MainThread

@@ -29,6 +29,7 @@ import javax.inject.Inject
  */
 class MainViewModel @Inject
 constructor(context: Application, private val dataManager: DataManager) : AndroidViewModel(context) {
+
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
     val mGalleryImages: SingleLiveEvent<List<GalleryImage>> = SingleLiveEvent()
     val snackbarMessage = SnackbarMessage()
@@ -62,5 +63,9 @@ constructor(context: Application, private val dataManager: DataManager) : Androi
     fun destroy() {
         compositeDisposable.clear()
         Timber.e("destroy")
+    }
+
+    fun getListGalleryImages(): SingleLiveEvent<List<GalleryImage>> {
+        return mGalleryImages
     }
 }
