@@ -13,9 +13,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.qualson.kotlin_mvvm_live_databinding_sample.R
 import com.qualson.kotlin_mvvm_live_databinding_sample.binding.FragmentDataBindingComponent
+import com.qualson.kotlin_mvvm_live_databinding_sample.data.model.GalleryImage
 import com.qualson.kotlin_mvvm_live_databinding_sample.databinding.MainFragmentBinding
 import com.qualson.kotlin_mvvm_live_databinding_sample.di.Injectable
 import com.qualson.kotlin_mvvm_live_databinding_sample.util.AutoClearedValue
+import com.qualson.kotlin_mvvm_live_databinding_sample.util.SnackbarUtils
 import javax.inject.Inject
 
 /**
@@ -37,14 +39,20 @@ class MainFragment : Fragment(), LifecycleRegistryOwner, Injectable {
 
     private var dataBindingComponent: android.databinding.DataBindingComponent = FragmentDataBindingComponent(this)
     private lateinit var binding: AutoClearedValue<MainFragmentBinding>
-//    internal var adapter: AutoClearedValue<MainAdapter>
+    private lateinit var adapter: AutoClearedValue<MainAdapter>
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         //        mainViewModel = MainActivity.obtainViewModel(getActivity());
         mainViewModel = ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
-//        val mainAdapter:MainAdapter = MainAdapter(dataBindingComponent )
-
+        val mainAdapter: MainAdapter = MainAdapter(dataBindingComponent, object : MainAdapter.GalleryClickCallback {
+            override fun onClick(galleryImage: GalleryImage) {
+                SnackbarUtils.showSnackbar(view, galleryImage.title)
+            }
+        })
+        adapter = AutoClearedValue(this, mainAdapter)
+        binding.get().imageList.adapter = mainAdapter
+        
 
     }
 
