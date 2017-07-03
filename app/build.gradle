@@ -1,10 +1,8 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
-
 apply plugin: "kotlin-kapt"
+
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.0"
@@ -35,8 +33,6 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
-
 }
 
 dependencies {
@@ -59,6 +55,9 @@ dependencies {
 
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    kapt group: 'com.android.databinding', name: 'compiler', version: '2.3.0'
+
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -110,7 +109,8 @@ dependencies {
     androidTestImplementation 'org.hamcrest:hamcrest-junit:2.0.0.0'
     androidTestImplementation "junit:junit:$JUNIT_VERSION"
     androidTestImplementation "com.android.support:support-annotations:$SUPPORT_LIBRARY_VERSION"
-    androidTestImplementation("com.android.support.test.espresso:espresso-contrib:$ESPRESSO_VERSION") {
+    androidTestImplementation(
+            "com.android.support.test.espresso:espresso-contrib:$ESPRESSO_VERSION") {
         exclude group: 'com.android.support', module: 'appcompat'
         exclude group: 'com.android.support', module: 'support-v4'
         exclude group: 'com.android.support', module: 'recyclerview-v7'

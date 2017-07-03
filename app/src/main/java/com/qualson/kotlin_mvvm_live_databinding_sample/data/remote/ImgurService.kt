@@ -2,11 +2,15 @@ package com.qualson.kotlin_mvvm_live_databinding_sample.data.remote
 
 import com.google.gson.GsonBuilder
 import com.qualson.kotlin_mvvm_live_databinding_sample.BuildConfig
+import com.qualson.mvvm_live_databinding.data.model.GalleryResponse
+import io.reactivex.Observable
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
+import retrofit2.http.Path
 
 /**
  * Created by ykim on 2017. 4. 11..
@@ -14,9 +18,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 interface ImgurService {
 
-//    @GET("/3/gallery/{section}/{sort}/{window}/{page}.json")
-//    fun getGallery(
-//            @Path("section") section: String, @Path("sort") sort: String): Observable<GalleryResponse>
+    @GET("/3/gallery/{section}/{sort}/{window}/{page}.json")
+    fun getGallery(
+            @Path("section") section: String, @Path("sort") sort: String): Observable<GalleryResponse>
 
     object Factory {
         @JvmStatic fun makeImugurService(): ImgurService {
