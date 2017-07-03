@@ -21,15 +21,105 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    configurations.all {
+        resolutionStrategy.force 'com.google.code.findbugs:jsr305:3.0.1'
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
+    final SUPPORT_LIBRARY_VERSION = '26.0.0-beta2'
+    final RETROFIT_VERSION = '2.3.0'
+    final OKHTTP3 = '3.8.1'
+    final RX_JAVA2 = '2.1.1'
+    final RX_ANDROID = '2.0.1'
+    final RX_KOTLIN = '2.0.0'
+    final DAGGER_VERSION = '2.11'
+    final archLifecycleVersion = "1.0.0-alpha3"
+
+    final ESPRESSO_VERSION = '2.2.1'
+    final DEXMAKER_VERSION = '1.4'
+    final MOCKITO_VERSION = '1.10.19'
+    final UI_AUTOMATOR_VERSION = '2.1.2'
+    final JUNIT_VERSION = '4.12'
+    final RUNNER_VERSION = '0.5'
+    final MOCK_WEBSERVER_VERSION = "3.6.0"
+
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestImplementation ('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:26.0.0-beta2'
-    testImplementation 'junit:junit:4.12'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+
+    implementation "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
+    implementation "com.android.support:design:$SUPPORT_LIBRARY_VERSION"
+    implementation "com.android.support:recyclerview-v7:$SUPPORT_LIBRARY_VERSION"
+    implementation "com.android.support:support-annotations:$SUPPORT_LIBRARY_VERSION"
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+
+    // arch live
+    implementation "android.arch.lifecycle:extensions:$archLifecycleVersion"
+    annotationProcessor "android.arch.lifecycle:compiler:$archLifecycleVersion"
+    // network
+    implementation "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
+    implementation "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$RETROFIT_VERSION"
+    implementation "com.squareup.okhttp3:okhttp:$OKHTTP3"
+    implementation "com.squareup.okhttp3:logging-interceptor:$OKHTTP3"
+    // rx
+    implementation "io.reactivex.rxjava2:rxjava:$RX_JAVA2"
+    implementation "io.reactivex.rxjava2:rxandroid:$RX_ANDROID"
+    implementation "io.reactivex.rxjava2:rxkotlin:$RX_KOTLIN"
+    // dagger2
+    implementation "com.google.dagger:dagger:$DAGGER_VERSION"
+    implementation "com.google.dagger:dagger-android-support:$DAGGER_VERSION"
+    annotationProcessor "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$DAGGER_VERSION"
+    // debuggin
+    implementation 'com.facebook.stetho:stetho:1.5.0'
+    implementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+    implementation 'com.jakewharton.timber:timber:4.5.1'
+    implementation 'com.squareup.leakcanary:leakcanary-android:1.5.1'
+    implementation 'org.apache.commons:commons-collections4:4.1'
+    // image loader
+    implementation 'com.github.bumptech.glide:glide:3.8.0'
+
+    // unit test
+    testImplementation "junit:junit:$JUNIT_VERSION"
+    testImplementation "com.squareup.okhttp3:mockwebserver:$MOCK_WEBSERVER_VERSION"
+    testImplementation("android.arch.core:core-testing:$archLifecycleVersion", {
+        exclude group: 'com.android.support', module: 'support-compat'
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'support-core-utils'
+    })
+
+    // ui test
+
+    androidTestImplementation 'org.hamcrest:hamcrest-junit:2.0.0.0'
+    androidTestImplementation "junit:junit:$JUNIT_VERSION"
+    androidTestImplementation "com.android.support:support-annotations:$SUPPORT_LIBRARY_VERSION"
+    androidTestImplementation("com.android.support.test.espresso:espresso-contrib:$ESPRESSO_VERSION") {
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'recyclerview-v7'
+    }
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$ESPRESSO_VERSION"
+    androidTestImplementation "com.android.support.test.espresso:espresso-intents:$ESPRESSO_VERSION"
+    androidTestImplementation "com.android.support.test.uiautomator:uiautomator-v18:$UI_AUTOMATOR_VERSION"
+    androidTestImplementation "com.android.support.test:runner:$RUNNER_VERSION"
+    androidTestImplementation "com.android.support.test:rules:$RUNNER_VERSION"
+    androidTestImplementation "org.mockito:mockito-core:$MOCKITO_VERSION"
+    androidTestImplementation "com.crittercism.dexmaker:dexmaker:$DEXMAKER_VERSION"
+    androidTestImplementation "com.crittercism.dexmaker:dexmaker-dx:$DEXMAKER_VERSION"
+    androidTestImplementation "com.crittercism.dexmaker:dexmaker-mockito:$DEXMAKER_VERSION"
+    androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
 }
