@@ -1,6 +1,4 @@
-package com.qualson.mvvm_live_databinding.data.model
-
-import com.qualson.kotlin_mvvm_live_databinding_sample.data.model.GalleryImage
+package com.qualson.kotlin_mvvm_live_databinding_sample.data.model
 
 /**
  * Created by ykim on 2017. 4. 11..

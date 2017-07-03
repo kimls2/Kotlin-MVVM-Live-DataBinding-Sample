@@ -2,7 +2,7 @@ package com.qualson.kotlin_mvvm_live_databinding_sample.data.remote
 
 import com.google.gson.GsonBuilder
 import com.qualson.kotlin_mvvm_live_databinding_sample.BuildConfig
-import com.qualson.mvvm_live_databinding.data.model.GalleryResponse
+import com.qualson.kotlin_mvvm_live_databinding_sample.data.model.GalleryResponse
 import io.reactivex.Observable
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
