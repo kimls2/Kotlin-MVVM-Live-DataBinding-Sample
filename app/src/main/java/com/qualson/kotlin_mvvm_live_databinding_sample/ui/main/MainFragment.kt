@@ -15,7 +15,6 @@ import com.qualson.kotlin_mvvm_live_databinding_sample.R
 import com.qualson.kotlin_mvvm_live_databinding_sample.binding.FragmentDataBindingComponent
 import com.qualson.kotlin_mvvm_live_databinding_sample.databinding.MainFragmentBinding
 import com.qualson.kotlin_mvvm_live_databinding_sample.di.Injectable
-import com.qualson.kotlin_mvvm_live_databinding_sample.ui.main.MainAdapter.GalleryClickCallback
 import com.qualson.kotlin_mvvm_live_databinding_sample.util.AutoClearedValue
 import javax.inject.Inject
 
@@ -44,7 +43,7 @@ class MainFragment : Fragment(), LifecycleRegistryOwner, Injectable {
         super.onActivityCreated(savedInstanceState)
         //        mainViewModel = MainActivity.obtainViewModel(getActivity());
         mainViewModel = ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
-        val mainAdapter:MainAdapter = MainAdapter(dataBindingComponent )
+//        val mainAdapter:MainAdapter = MainAdapter(dataBindingComponent )
 
 
     }
