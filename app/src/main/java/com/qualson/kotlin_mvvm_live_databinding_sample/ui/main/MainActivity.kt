@@ -24,5 +24,4 @@ class MainActivity : BaseActivity() {
         }
         return mainFragment
     }
-
 }
