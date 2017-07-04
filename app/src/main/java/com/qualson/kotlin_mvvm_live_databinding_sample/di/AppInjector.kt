@@ -19,12 +19,8 @@ package com.qualson.kotlin_mvvm_live_databinding_sample.di
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
-import android.support.v4.app.FragmentManager
-import com.qualson.mvvm_live_databinding.MyApp
+import com.qualson.kotlin_mvvm_live_databinding_sample.MyApp
 import dagger.android.AndroidInjection
-import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.HasSupportFragmentInjector
 
 /**
@@ -32,7 +28,7 @@ import dagger.android.support.HasSupportFragmentInjector
  */
 object AppInjector {
     fun init(myApp: MyApp) {
-        DaggerAppComponent.builder().application(myApp).build().inject(myApp)
+//        DaggerAppComponent.builder().application(myApp).build().inject(myApp)
         myApp.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
             override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle) {
                 handleActivity(activity)
@@ -68,13 +64,16 @@ object AppInjector {
         if (activity is HasSupportFragmentInjector) {
             AndroidInjection.inject(activity)
         }
-        (activity as? FragmentActivity)?.supportFragmentManager?.registerFragmentLifecycleCallbacks(object : FragmentManager.FragmentLifecycleCallbacks() {
-            override fun onFragmentCreated(fm: FragmentManager?, f: Fragment?,
-                                           savedInstanceState: Bundle?) {
-                if (f is Injectable) {
-                    AndroidSupportInjection.inject(f!!)
-                }
-            }
-        }, true)
+//        if (activity is FragmentActivity) {
+//            (activity as? FragmentActivity)?.supportFragmentManager?.registerFragmentLifecycleCallbacks(object : FragmentManager.FragmentLifecycleCallbacks() {
+//                override fun onFragmentCreated(fm: FragmentManager?, f: Fragment?,
+//                                               savedInstanceState: Bundle?) {
+//                    if (f is Injectable) {
+//                        AndroidSupportInjection.inject(f)
+//                    }
+//                }
+//            }, true)
+//        }
+
     }
 }

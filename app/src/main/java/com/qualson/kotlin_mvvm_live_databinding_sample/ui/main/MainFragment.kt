@@ -15,7 +15,6 @@ import com.qualson.kotlin_mvvm_live_databinding_sample.databinding.MainFragmentB
 import com.qualson.kotlin_mvvm_live_databinding_sample.di.Injectable
 import com.qualson.kotlin_mvvm_live_databinding_sample.util.AutoClearedValue
 import com.qualson.kotlin_mvvm_live_databinding_sample.util.SnackbarUtils
-import javax.inject.Inject
 
 /**
  * Created by ykim on 2017. 6. 28..
@@ -23,18 +22,17 @@ import javax.inject.Inject
 
 class MainFragment : Fragment(), LifecycleRegistryOwner, Injectable {
 
+//    @Inject lateinit var viewModelFactory: ViewModelFactory
     private val lifecycleRegistry = LifecycleRegistry(this)
-
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-
     private val dataBindingComponent: android.databinding.DataBindingComponent = FragmentDataBindingComponent(this)
     private lateinit var mainViewModel: MainViewModel
     private lateinit var binding: AutoClearedValue<MainFragmentBinding>
     private lateinit var adapter: AutoClearedValue<MainAdapter>
+    private lateinit var viewModelFactory: ViewModelProvider.Factory
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+//        viewModelFactory = ViewModelProvider.NewInstanceFactory().create(MainViewModel::class.java)
         mainViewModel = ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
         val mainAdapter: MainAdapter = MainAdapter(dataBindingComponent, object : MainAdapter.GalleryClickCallback {
             override fun onClick(galleryImage: GalleryImage) {
