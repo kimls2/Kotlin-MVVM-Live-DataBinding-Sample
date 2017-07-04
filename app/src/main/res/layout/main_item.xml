@@ -7,7 +7,7 @@
 
         <variable
                 name="galleryImage"
-                type="com.qualson.kotlin_mvvm_live_databinding_sample.data.model.GalleryImage"/>
+                type="com.qualson.kotlin_mvp.data.model.GalleryImage"/>
     </data>
 
 
