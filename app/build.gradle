@@ -55,7 +55,7 @@ dependencies {
 
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    kapt group: 'com.android.databinding', name: 'compiler', version: '2.3.0'
+    kapt group: 'com.android.databinding', name: 'compiler', version: '2.3.3'
 
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
