@@ -7,20 +7,13 @@ import com.qualson.kotlin_mvvm_live_databinding_sample.util.ActivityUtils
 
 class MainActivity : BaseActivity() {
 
-//    lateinit var mainComponent: MainComponent
-//    @Inject lateinit var mainViewModel: MainViewModel
-
-
     override fun getLayoutResId() = R.layout.main_activity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-//        mainComponent = getAppComponent().inject(MainModule())
-//        mainComponent.inject(this)
-//        mainViewModel.start()
-
         findOrCreateViewFragment()
+
+
     }
 
     private fun findOrCreateViewFragment(): MainFragment {

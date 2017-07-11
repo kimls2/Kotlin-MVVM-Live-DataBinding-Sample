@@ -19,7 +19,6 @@ package com.qualson.kotlin_mvvm_live_databinding_sample.ui.main
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import com.qualson.kotlin_mvvm_live_databinding_sample.R
 import com.qualson.kotlin_mvvm_live_databinding_sample.data.model.GalleryImage
@@ -27,19 +26,12 @@ import com.qualson.kotlin_mvvm_live_databinding_sample.databinding.MainItemBindi
 import com.qualson.kotlin_mvvm_live_databinding_sample.ui.common.DataBoundListAdapter
 
 
-class MainAdapter(private val dataBindingComponent: android.databinding.DataBindingComponent,
-                  private val galleryClickCallback: GalleryClickCallback) : DataBoundListAdapter<GalleryImage, MainItemBinding>() {
+class MainAdapter(private val dataBindingComponent: android.databinding.DataBindingComponent
+) : DataBoundListAdapter<GalleryImage, MainItemBinding>() {
 
     override fun createBinding(parent: ViewGroup): MainItemBinding {
         val binding = DataBindingUtil.inflate<ViewDataBinding>(LayoutInflater.from(parent.context), R.layout.main_item,
                 parent, false, dataBindingComponent)
-        binding.root.setOnClickListener(View.OnClickListener {
-            //            val galleryImage = binding.
-//                    galleryClickCallback.onClick(galleryImage)
-//            galleryClickCallback.onClick()
-//            galleryClickCallback.onClick(galleryImage = )
-
-        })
         return binding as MainItemBinding
     }
 

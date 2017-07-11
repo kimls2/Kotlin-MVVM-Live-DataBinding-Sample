@@ -3,8 +3,8 @@ package com.qualson.kotlin_mvvm_live_databinding_sample.injection
 import android.app.Application
 import android.arch.persistence.room.Room
 import com.qualson.kotlin_mvvm_live_databinding_sample.data.remote.ImgurService
-import com.qualson.kotlin_mvvm_live_databinding_sample.db.SampleDb
-import com.qualson.kotlin_mvvm_live_databinding_sample.db.UserDao
+import com.qualson.kotlin_mvvm_live_databinding_sample.data.local.SampleDb
+import com.qualson.kotlin_mvvm_live_databinding_sample.data.local.UserDao
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

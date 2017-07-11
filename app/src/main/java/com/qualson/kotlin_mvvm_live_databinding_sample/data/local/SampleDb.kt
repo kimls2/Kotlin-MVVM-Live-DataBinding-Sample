@@ -1,4 +1,4 @@
-package com.qualson.kotlin_mvvm_live_databinding_sample.db
+package com.qualson.kotlin_mvvm_live_databinding_sample.data.local
 
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.RoomDatabase

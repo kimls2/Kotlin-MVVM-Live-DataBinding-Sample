@@ -12,7 +12,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.qualson.kotlin_mvvm_live_databinding_sample.R
 import com.qualson.kotlin_mvvm_live_databinding_sample.binding.FragmentDataBindingComponent
-import com.qualson.kotlin_mvvm_live_databinding_sample.data.model.GalleryImage
 import com.qualson.kotlin_mvvm_live_databinding_sample.databinding.MainFragmentBinding
 import com.qualson.kotlin_mvvm_live_databinding_sample.util.AutoClearedValue
 import com.qualson.kotlin_mvvm_live_databinding_sample.util.SnackbarUtils
@@ -39,15 +38,15 @@ class MainFragment : Fragment(), LifecycleRegistryOwner {
 
         mainComponent = context.getAppComponent().inject(MainModule())
         mainComponent.inject(this)
-        val mainAdapter: MainAdapter = MainAdapter(dataBindingComponent, object : MainAdapter.GalleryClickCallback {
-            override fun onClick(galleryImage: GalleryImage) {
-                SnackbarUtils.showSnackbar(view, galleryImage.title)
-            }
-        })
+        val mainAdapter: MainAdapter = MainAdapter(dataBindingComponent)
         adapter = AutoClearedValue(this, mainAdapter)
         binding.get().imageList.adapter = mainAdapter
         mainViewModel.getListGalleryImages().observe(this, Observer { gallery -> adapter.get().replace(gallery) })
         mainViewModel.snackbarMessage.observe(this, Observer { SnackbarUtils.showSnackbar(view, it) })
+
+        // db test
+        mainViewModel.insert()
+        mainViewModel.select()
 
     }
 

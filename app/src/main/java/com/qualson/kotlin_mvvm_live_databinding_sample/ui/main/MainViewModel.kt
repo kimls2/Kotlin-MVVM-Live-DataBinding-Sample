@@ -6,11 +6,11 @@ import android.arch.lifecycle.AndroidViewModel
 import com.qualson.kotlin_mvvm_live_databinding_sample.data.DataManager
 import com.qualson.kotlin_mvvm_live_databinding_sample.data.SingleLiveEvent
 import com.qualson.kotlin_mvvm_live_databinding_sample.data.model.GalleryImage
+import com.qualson.kotlin_mvvm_live_databinding_sample.data.model.User
 import com.qualson.kotlin_mvvm_live_databinding_sample.util.SnackbarMessage
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.annotations.NonNull
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.observers.DisposableObserver
+import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import javax.inject.Inject
@@ -27,26 +27,51 @@ constructor(context: Application, val dataManager: DataManager) : AndroidViewMod
         loadImages()
     }
 
+    fun select() {
+        val id = 1
+        compositeDisposable.add(dataManager.selectUser(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(
+                        onNext = { println(" name : $it") }, onError = { println("error :" + it.localizedMessage) }
+
+                )
+
+        )
+    }
+
+    fun insert() {
+        val user = User(1, "test")
+        compositeDisposable.add(dataManager.insertUser(user)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(
+                        onError = {
+                            snackbarMessage.value = it.localizedMessage
+                            println("insert fail")
+                        },
+                        onComplete = {
+                            snackbarMessage.value = "insert success!!!"
+                            println("insert success")
+                        }
+                )
+
+        )
+    }
+
     fun loadImages() {
         compositeDisposable.add(dataManager.getGallery()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(object : DisposableObserver<List<GalleryImage>>() {
-                    override fun onNext(@NonNull galleryImages: List<GalleryImage>) {
-                        mGalleryImages.value = galleryImages
-                        snackbarMessage.value = "success"
-                    }
+                .subscribeBy(onNext = { mGalleryImages.value = it },
+                        onError = {
+                            snackbarMessage.value = it.localizedMessage
+                        },
+                        onComplete = {
+                            snackbarMessage.value = "completed"
+                        }
+                ))
 
-                    override fun onError(@NonNull e: Throwable) {
-                        Timber.e(e.message)
-                        snackbarMessage.value = e.localizedMessage
-                    }
-
-                    override fun onComplete() {
-                        Timber.e("complete")
-                        snackbarMessage.value = "completed"
-                    }
-                }))
     }
 
     fun destroy() {
