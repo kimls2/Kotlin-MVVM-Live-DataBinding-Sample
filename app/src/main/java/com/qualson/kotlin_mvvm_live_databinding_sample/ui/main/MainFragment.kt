@@ -42,7 +42,9 @@ class MainFragment : Fragment(), LifecycleRegistryOwner {
         adapter = AutoClearedValue(this, mainAdapter)
         binding.get().imageList.adapter = mainAdapter
         mainViewModel.getListGalleryImages().observe(this, Observer { gallery -> adapter.get().replace(gallery) })
-        mainViewModel.snackbarMessage.observe(this, Observer { SnackbarUtils.showSnackbar(view, it) })
+        mainViewModel.snackbarMessage.observe(this, Observer {
+            SnackbarUtils.showSnackbar(view, it)
+        })
 
         // db test
         mainViewModel.insert()

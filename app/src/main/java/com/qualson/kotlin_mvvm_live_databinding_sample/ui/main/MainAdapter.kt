@@ -46,8 +46,4 @@ class MainAdapter(private val dataBindingComponent: android.databinding.DataBind
     override fun areContentsTheSame(oldItem: GalleryImage, newItem: GalleryImage): Boolean {
         return true
     }
-
-    interface GalleryClickCallback {
-        fun onClick(galleryImage: GalleryImage)
-    }
 }

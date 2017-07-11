@@ -23,6 +23,7 @@ class MyApp : Application() {
         super.onCreate()
 
         component = DaggerAppComponent.builder().appModule(AppModule(this)).build()
+
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
             if (LeakCanary.isInAnalyzerProcess(this)) {

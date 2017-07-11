@@ -13,7 +13,6 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         findOrCreateViewFragment()
 
-
     }
 
     private fun findOrCreateViewFragment(): MainFragment {
