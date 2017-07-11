@@ -43,7 +43,7 @@ dependencies {
     final RX_ANDROID = '2.0.1'
     final RX_KOTLIN = '2.0.0'
     final DAGGER_VERSION = '2.11'
-    final archLifecycleVersion = "1.0.0-alpha3"
+    final archLifecycleVersion = "1.0.0-alpha1"
 
     final ESPRESSO_VERSION = '2.2.1'
     final DEXMAKER_VERSION = '1.4'
@@ -69,6 +69,8 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
 
     // arch live
+    implementation "android.arch.persistence.room:runtime:$archLifecycleVersion"
+    kapt "android.arch.persistence.room:compiler:$archLifecycleVersion"
     implementation "android.arch.lifecycle:extensions:$archLifecycleVersion"
     kapt "android.arch.lifecycle:compiler:$archLifecycleVersion"
     // network
