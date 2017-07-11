@@ -1,7 +1,9 @@
 package com.qualson.kotlin_mvvm_live_databinding_sample.ui.main
 
 
-import android.arch.lifecycle.*
+import android.arch.lifecycle.LifecycleRegistry
+import android.arch.lifecycle.LifecycleRegistryOwner
+import android.arch.lifecycle.Observer
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -12,28 +14,31 @@ import com.qualson.kotlin_mvvm_live_databinding_sample.R
 import com.qualson.kotlin_mvvm_live_databinding_sample.binding.FragmentDataBindingComponent
 import com.qualson.kotlin_mvvm_live_databinding_sample.data.model.GalleryImage
 import com.qualson.kotlin_mvvm_live_databinding_sample.databinding.MainFragmentBinding
-import com.qualson.kotlin_mvvm_live_databinding_sample.di.Injectable
 import com.qualson.kotlin_mvvm_live_databinding_sample.util.AutoClearedValue
 import com.qualson.kotlin_mvvm_live_databinding_sample.util.SnackbarUtils
+import com.qualson.kotlin_mvvm_live_databinding_sample.util.getAppComponent
+import javax.inject.Inject
 
 /**
  * Created by ykim on 2017. 6. 28..
  */
 
-class MainFragment : Fragment(), LifecycleRegistryOwner, Injectable {
+class MainFragment : Fragment(), LifecycleRegistryOwner {
 
-//    @Inject lateinit var viewModelFactory: ViewModelFactory
+
     private val lifecycleRegistry = LifecycleRegistry(this)
     private val dataBindingComponent: android.databinding.DataBindingComponent = FragmentDataBindingComponent(this)
-    private lateinit var mainViewModel: MainViewModel
     private lateinit var binding: AutoClearedValue<MainFragmentBinding>
     private lateinit var adapter: AutoClearedValue<MainAdapter>
-    private lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    @Inject lateinit var mainViewModel: MainViewModel
+    lateinit var mainComponent: MainComponent
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-//        viewModelFactory = ViewModelProvider.NewInstanceFactory().create(MainViewModel::class.java)
-        mainViewModel = ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
+
+        mainComponent = context.getAppComponent().inject(MainModule())
+        mainComponent.inject(this)
         val mainAdapter: MainAdapter = MainAdapter(dataBindingComponent, object : MainAdapter.GalleryClickCallback {
             override fun onClick(galleryImage: GalleryImage) {
                 SnackbarUtils.showSnackbar(view, galleryImage.title)

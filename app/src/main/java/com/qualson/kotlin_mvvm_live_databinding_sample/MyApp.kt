@@ -2,9 +2,9 @@ package com.qualson.kotlin_mvvm_live_databinding_sample
 
 import android.app.Application
 import android.content.Context
-import com.qualson.kotlin_mvvm_live_databinding_sample.injection_normal.component.ApplicationComponent
-import com.qualson.kotlin_mvvm_live_databinding_sample.injection_normal.component.DaggerApplicationComponent
-import com.qualson.kotlin_mvvm_live_databinding_sample.injection_normal.module.ApplicationModule
+import com.qualson.kotlin_mvvm_live_databinding_sample.injection.AppComponent
+import com.qualson.kotlin_mvvm_live_databinding_sample.injection.AppModule
+import com.qualson.kotlin_mvvm_live_databinding_sample.injection.DaggerAppComponent
 import com.squareup.leakcanary.LeakCanary
 import com.squareup.leakcanary.RefWatcher
 import timber.log.Timber
@@ -15,19 +15,26 @@ import timber.log.Timber
 
 class MyApp : Application() {
 
-    lateinit var applicaionComponent: ApplicationComponent
     private var refWatcher: RefWatcher? = null
+    lateinit var component: AppComponent
 
     override fun onCreate() {
         super.onCreate()
-        applicaionComponent = DaggerApplicationComponent.builder().applicationModule(ApplicationModule(this)).build()
 
+        component = DaggerAppComponent.builder().appModule(AppModule(this)).build()
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
             if (LeakCanary.isInAnalyzerProcess(this)) {
                 return
             }
             refWatcher = LeakCanary.install(this)
+        }
+    }
+
+    override fun getSystemService(name: String?): Any {
+        when (name) {
+            "component" -> return component
+            else -> return super.getSystemService(name)
         }
     }
 
@@ -41,4 +48,6 @@ class MyApp : Application() {
             return context.applicationContext as MyApp
         }
     }
+
+
 }

@@ -6,8 +6,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.qualson.kotlin_mvvm_live_databinding_sample.BuildConfig
 import com.qualson.kotlin_mvvm_live_databinding_sample.MyApp
-import com.qualson.kotlin_mvvm_live_databinding_sample.injection_normal.component.ActivityComponent
-import com.qualson.kotlin_mvvm_live_databinding_sample.injection_normal.component.DaggerActivityComponent
 
 /**
  * Created by ykim on 2017. 7. 3..
@@ -15,7 +13,6 @@ import com.qualson.kotlin_mvvm_live_databinding_sample.injection_normal.componen
 
 abstract class BaseActivity : AppCompatActivity(), LifecycleRegistryOwner {
 
-    protected var activityComponent: ActivityComponent? = null
     private val lifecycleRegistry = LifecycleRegistry(this)
 
 
@@ -27,7 +24,6 @@ abstract class BaseActivity : AppCompatActivity(), LifecycleRegistryOwner {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(getLayoutResId())
-        activityComponent = DaggerActivityComponent.builder().applicationComponent((applicationContext as MyApp).applicaionComponent).build()
     }
 
     override fun onDestroy() {

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.qualson.kotlin_mvvm_live_databinding_sample">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name="com.qualson.kotlin_mvvm_live_databinding_sample.MyApp"
         android:allowBackup="true"

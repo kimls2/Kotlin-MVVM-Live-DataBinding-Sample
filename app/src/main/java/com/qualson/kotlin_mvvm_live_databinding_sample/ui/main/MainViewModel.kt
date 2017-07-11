@@ -3,9 +3,6 @@ package com.qualson.kotlin_mvvm_live_databinding_sample.ui.main
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
-import android.databinding.Bindable
-import android.databinding.ObservableBoolean
-import android.databinding.ObservableField
 import com.qualson.kotlin_mvvm_live_databinding_sample.data.DataManager
 import com.qualson.kotlin_mvvm_live_databinding_sample.data.SingleLiveEvent
 import com.qualson.kotlin_mvvm_live_databinding_sample.data.model.GalleryImage
@@ -18,17 +15,9 @@ import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import javax.inject.Inject
 
-/**
- * Exposes the data to be used in the statistics screen.
- *
- *
- * This ViewModel uses both [ObservableField]s ([ObservableBoolean]s in this case) and
- * [Bindable] getters. The values in [ObservableField]s are used directly in the layout,
- * whereas the [Bindable] getters allow us to add some logic to it. This is
- * preferable to having logic in the XML layout.
- */
+
 class MainViewModel @Inject
-constructor(context: Application, private val dataManager: DataManager) : AndroidViewModel(context) {
+constructor(context: Application, val dataManager: DataManager) : AndroidViewModel(context) {
 
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
     val mGalleryImages: SingleLiveEvent<List<GalleryImage>> = SingleLiveEvent()

@@ -54,7 +54,6 @@ interface ImgurService {
     }
 
     companion object {
-
-        val ENDPOINT = "https://api.imgur.com"
+        private const val ENDPOINT = "https://api.imgur.com"
     }
 }
