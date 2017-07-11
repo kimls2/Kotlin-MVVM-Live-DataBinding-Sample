@@ -1,5 +1,6 @@
 package com.qualson.kotlin_mvvm_live_databinding_sample.data.remote
 
+import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.google.gson.GsonBuilder
 import com.qualson.kotlin_mvvm_live_databinding_sample.BuildConfig
 import com.qualson.kotlin_mvvm_live_databinding_sample.data.model.GalleryResponse
@@ -31,6 +32,7 @@ interface ImgurService {
                 HttpLoggingInterceptor.Level.NONE
 
             val okHttpClient = OkHttpClient.Builder() //
+                    .addNetworkInterceptor(StethoInterceptor())
                     .addInterceptor(logging)  //
                     .addInterceptor { chain ->
                         val request = chain.request()

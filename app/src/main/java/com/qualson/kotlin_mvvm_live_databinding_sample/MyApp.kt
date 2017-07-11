@@ -2,6 +2,7 @@ package com.qualson.kotlin_mvvm_live_databinding_sample
 
 import android.app.Application
 import android.content.Context
+import com.facebook.stetho.Stetho
 import com.qualson.kotlin_mvvm_live_databinding_sample.injection.AppComponent
 import com.qualson.kotlin_mvvm_live_databinding_sample.injection.AppModule
 import com.qualson.kotlin_mvvm_live_databinding_sample.injection.DaggerAppComponent
@@ -28,6 +29,7 @@ class MyApp : Application() {
                 return
             }
             refWatcher = LeakCanary.install(this)
+            Stetho.initializeWithDefaults(this)
         }
     }
 
