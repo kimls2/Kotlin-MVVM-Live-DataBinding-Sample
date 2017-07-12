@@ -13,6 +13,6 @@ class MainModule {
 
     @Provides
     fun provideMainViewModel(application: Application, dataManager: DataManager): MainViewModel {
-        return MainViewModel(application, dataManager)
+        return MainViewModel(dataManager)
     }
 }

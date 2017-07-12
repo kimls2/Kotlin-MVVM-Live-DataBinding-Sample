@@ -1,8 +1,7 @@
 package com.qualson.kotlin_mvvm_live_databinding_sample.ui.main
 
 
-import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
+import android.arch.lifecycle.ViewModel
 import com.qualson.kotlin_mvvm_live_databinding_sample.data.DataManager
 import com.qualson.kotlin_mvvm_live_databinding_sample.data.SingleLiveEvent
 import com.qualson.kotlin_mvvm_live_databinding_sample.data.model.GalleryImage
@@ -17,7 +16,7 @@ import javax.inject.Inject
 
 
 class MainViewModel @Inject
-constructor(context: Application, val dataManager: DataManager) : AndroidViewModel(context) {
+constructor(val dataManager: DataManager) : ViewModel() {
 
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
     val mGalleryImages: SingleLiveEvent<List<GalleryImage>> = SingleLiveEvent()

@@ -35,15 +35,7 @@ data class GalleryImage(
     }
 
     companion object {
-        private val BASE_IMAGE_ADDRESS = "http://i.imgur.com/"
-        val MEDIUM_THUMBNAIL = 'm'
-
-        fun getThumbnailSize(id: String?, is_album: Boolean, cover: String?): String {
-            var thumbnailId = id
-            if (is_album) {
-                thumbnailId = cover
-            }
-            return BASE_IMAGE_ADDRESS + thumbnailId + MEDIUM_THUMBNAIL + ".jpg"
-        }
+        private const val BASE_IMAGE_ADDRESS = "http://i.imgur.com/"
+        private const val MEDIUM_THUMBNAIL = 'm'
     }
 }
