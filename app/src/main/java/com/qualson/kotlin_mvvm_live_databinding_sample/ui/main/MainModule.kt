@@ -1,6 +1,5 @@
 package com.qualson.kotlin_mvvm_live_databinding_sample.ui.main
 
-import android.app.Application
 import com.qualson.kotlin_mvvm_live_databinding_sample.data.DataManager
 import dagger.Module
 import dagger.Provides
@@ -12,7 +11,7 @@ import dagger.Provides
 class MainModule {
 
     @Provides
-    fun provideMainViewModel(application: Application, dataManager: DataManager): MainViewModel {
+    fun provideMainViewModel(dataManager: DataManager): MainViewModel {
         return MainViewModel(dataManager)
     }
 }
